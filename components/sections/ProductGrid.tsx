@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { motion } from "framer-motion"
 import ProductCard from "@/components/products/ProductCard"
 import type { Product, Category } from "@/types"
@@ -8,7 +8,8 @@ import { getProducts, getProductsByCategory, getCategories } from "@/lib/firesto
 import { useToast } from "@/hooks/use-toast"
 import { useRouter, useSearchParams } from "next/navigation"
 
-export default function ProductGrid() {
+// Separate component for the search params logic
+function ProductGridWithParams() {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [selectedCategory, setSelectedCategory] = useState("all")
@@ -46,7 +47,7 @@ export default function ProductGrid() {
       setSelectedCategory("all")
       fetchProducts()
     }
-  }, [searchParams])
+  }, [searchParams, selectedCategory, toast])
 
   const fetchData = async () => {
     setLoading(true)
@@ -167,65 +168,63 @@ export default function ProductGrid() {
   return (
     <section id="products" className=" bg-[#212121] py-6 sm:py-8 md:py-12 lg:py-16 min-h-screen w-screen">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-    
-
         {/* Category Filter */}
-       {/* CATEGORY FILTER – Ultra-premium glass pill */}
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.2 }}
-  viewport={{ once: true }}
-  className="flex justify-center mb-6 sm:mb-8 md:mb-12"
->
-  <div
-    className="inline-flex flex-wrap justify-center gap-1.5 sm:gap-2 rounded-full
-                backdrop-blur-xl p-1.5 sm:p-2
-               shadow-[0_8px_32px_rgba(0,0,0,.12)]
-               border border-white/20 bg-gradient-to-t from-[#212121] to-[#444444] p-2"
-  >
-    {/* "All" button */}
-    <motion.button
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={() => handleCategoryChange("all")}
-      className={`relative rounded-full px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-bold
-                  transition-all duration-300 ease-out overflow-hidden
-                  before:absolute before:inset-0 before:rounded-full
-                  before:transition-all before:duration-500
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
-                  ${
-                    selectedCategory === "all"
-                      ? "text-white bg-[#212121] shadow-[0_6px_20px_rgba(33,33,33,.4)]"
-                      : "text-[#212121] bg-white/80 hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,.08)]"
-                  }`}
-    >
-      <span className="relative z-10">All</span>
-    </motion.button>
+        {/* CATEGORY FILTER – Ultra-premium glass pill */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-6 sm:mb-8 md:mb-12"
+        >
+          <div
+            className="inline-flex flex-wrap justify-center gap-1.5 sm:gap-2 rounded-full
+                        backdrop-blur-xl p-1.5 sm:p-2
+                       shadow-[0_8px_32px_rgba(0,0,0,.12)]
+                       border border-white/20 bg-gradient-to-t from-[#212121] to-[#444444] p-2"
+          >
+            {/* "All" button */}
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleCategoryChange("all")}
+              className={`relative rounded-full px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-bold
+                          transition-all duration-300 ease-out overflow-hidden
+                          before:absolute before:inset-0 before:rounded-full
+                          before:transition-all before:duration-500
+                          focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+                          ${
+                            selectedCategory === "all"
+                              ? "text-white bg-[#212121] shadow-[0_6px_20px_rgba(33,33,33,.4)]"
+                              : "text-[#212121] bg-white/80 hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,.08)]"
+                          }`}
+            >
+              <span className="relative z-10">All</span>
+            </motion.button>
 
-    {/* Category buttons */}
-    {categories.map((category) => (
-      <motion.button
-        key={category.id}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => handleCategoryChange(category.slug)}
-        className={`relative rounded-full px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-bold
-                    transition-all duration-300 ease-out overflow-hidden
-                    before:absolute before:inset-0 before:rounded-full
-                    before:transition-all before:duration-500
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
-                    ${
-                      selectedCategory === category.slug
-                        ? "text-white bg-[#212121] shadow-[0_6px_20px_rgba(33,33,33,.4)]"
-                        : "text-[#212121] bg-white/80 hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,.08)]"
-                    }`}
-      >
-        <span className="relative z-10">{category.name}</span>
-      </motion.button>
-    ))}
-  </div>
-</motion.div>
+            {/* Category buttons */}
+            {categories.map((category) => (
+              <motion.button
+                key={category.id}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleCategoryChange(category.slug)}
+                className={`relative rounded-full px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-bold
+                            transition-all duration-300 ease-out overflow-hidden
+                            before:absolute before:inset-0 before:rounded-full
+                            before:transition-all before:duration-500
+                            focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+                            ${
+                              selectedCategory === category.slug
+                                ? "text-white bg-[#212121] shadow-[0_6px_20px_rgba(33,33,33,.4)]"
+                                : "text-[#212121] bg-white/80 hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,.08)]"
+                            }`}
+              >
+                <span className="relative z-10">{category.name}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Products Grid */}
         {products.length === 0 ? (
@@ -257,5 +256,27 @@ export default function ProductGrid() {
         )}
       </div>
     </section>
+  )
+}
+
+// Loading fallback component
+function ProductGridFallback() {
+  return (
+    <section className="bg-[#212121] py-6 sm:py-8 md:py-12 lg:py-16 min-h-screen w-screen">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center py-12 sm:py-24">
+          <div className="h-10 w-10 sm:h-12 sm:w-12 animate-spin rounded-full border-b-2 border-rose-600"></div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Main component with Suspense boundary
+export default function ProductGrid() {
+  return (
+    <Suspense fallback={<ProductGridFallback />}>
+      <ProductGridWithParams />
+    </Suspense>
   )
 }
