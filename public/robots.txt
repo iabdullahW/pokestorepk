@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://pokemonstorepk.vercel.app/
+
+# Sitemaps
+Sitemap: https://pokemonstorepk.vercel.app/sitemap.xml

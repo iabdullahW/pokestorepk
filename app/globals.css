@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --clean-dark: #212121;
+  --clean-dark-light: #424242;
+  --clean-dark-lighter: #757575;
+  --clean-secondary: #9E9E9E;
+  --clean-muted: #BDBDBD;
+  --clean-light: #F5F5F5;
+  --clean-white: #FFFFFF;
+}
+
+/* Video Hero Section Styles */
+.video-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-hero video {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure video works on mobile devices */
+@media (max-width: 768px) {
+  .video-hero video {
+    object-position: center center;
+  }
+}
+
+/* Video overlay gradients for better text readability */
+.video-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Text shadow for better readability over video */
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar transparency override */
+.navbar-transparent {
+  background-color: transparent !important;
+  background: none !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure sticky navbar transparency */
+.navbar-transparent.sticky {
+  background-color: rgba(0, 0, 0, 0) !important;
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+/* Backdrop blur for modern glass effect */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Custom button styles for video overlay */
+.btn-video-overlay {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-video-overlay:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Clean Dark Pattern */
+.bg-clean-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(33, 33, 33, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(245, 245, 245, 0.1) 0%, transparent 50%);
+}
+
+/* Clean Dark Text Gradient */
+.clean-text-gradient {
+  background: linear-gradient(135deg, #212121 0%, #757575 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Clean Light Text Gradient */
+.clean-light-text-gradient {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button Styles */
+.btn-clean-dark {
+  background: linear-gradient(135deg, #212121 0%, #424242 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-dark:hover {
+  background: linear-gradient(135deg, #424242 0%, #212121 100%);
+  transform: translateY(-2px);
+}
+
+.btn-clean-light {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+  color: #212121;
+  transition: all 0.3s ease;
+  border: 1px solid #E0E0E0;
+}
+
+.btn-clean-light:hover {
+  background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
+  transform: translateY(-2px);
+}
+
+.btn-clean-outline {
+  border: 2px solid #212121;
+  color: #212121;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-outline:hover {
+  background: #212121;
+  color: white;
+}
+
+.btn-clean-outline-light {
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-outline-light:hover {
+  background: #FFFFFF;
+  color: #212121;
+}
+
+.btn-clean-ghost {
+  color: #212121;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-ghost:hover {
+  background: rgba(33, 33, 33, 0.1);
+}
+
+.btn-clean-ghost-light {
+  color: #FFFFFF;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Shadow Styles */
+.shadow-clean-dark {
+  box-shadow: 0 4px 14px 0 rgba(33, 33, 33, 0.3);
+}
+
+.shadow-clean-dark-lg {
+  box-shadow: 0 8px 25px 0 rgba(33, 33, 33, 0.4);
+}
+
+.shadow-clean-light {
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.shadow-clean-light-lg {
+  box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Text Colors */
+.text-clean-dark-light {
+  color: #424242;
+}
+
+.text-clean-secondary {
+  color: #9E9E9E;
+}
+
+.text-clean-muted {
+  color: #BDBDBD;
+}
+
+.text-clean-lighter {
+  color: #757575;
+}
+
+/* Responsive utilities */
+.no-overflow-x {
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2C2C2C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D1D1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #424242;
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .text-shadow-lg {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
