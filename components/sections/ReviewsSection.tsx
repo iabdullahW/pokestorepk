@@ -35,7 +35,7 @@ export default function ReviewsSection() {
     "id": 4,
     "name": "Hira Baloch",
     "rating": 5,
-    "comment": "Neem and Ubtan Soaps combo is perfect for my sensitive skin. No irritation at all!"
+    "comment": "Perfect colors and design. My kids are thrilled with their new Pokémon cards!"
   },
   {
     "id": 5,
