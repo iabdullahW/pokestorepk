@@ -13,7 +13,7 @@ const metaTags = getMetaTags();
 
 export const metadata = {
     metadataBase: new URL("https://pokemonstorepk.vercel.app"),
-  title: "PokemonStore - Your Ultimate Destination for Pokémon Cards",
+  title: "PokeStore - Your Ultimate Destination for Pokémon Cards",
   description:
     "Discover the best Pokémon cards, collectibles, and accessories at PokemonStore. Shop now for exclusive deals and rare finds!",
   icons: {
@@ -22,7 +22,7 @@ export const metadata = {
     apple: '/favicon.png',
   },
   openGraph: {
-    title: "PokemonStore - Your Ultimate Destination for Pokémon Cards",
+    title: "PokeStore - Your Ultimate Destination for Pokémon Cards",
     description: "Discover the best Pokémon cards, collectibles, and accessories at PokemonStore. Shop now for exclusive deals and rare finds!",
     url: "https://pokemonstorepk.vercel.app/",
     images: [{ url: "/aboutus.jpg" }],
@@ -30,7 +30,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PokemonStore - Your Ultimate Destination for Pokémon Cards",
+    title: "Poketore - Your Ultimate Destination for Pokémon Cards",
     description: "Discover the best Pokémon cards, collectibles, and accessories at PokemonStore. Shop now for exclusive deals and rare finds!",
     site: "@pokemonstorepk",
     images: ["/aboutus.jpg"],

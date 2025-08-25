@@ -43,9 +43,7 @@ export default function HeroSection({ onSearchClick }: HeroSectionProps) {
           Your browser does not support the video tag.
         </video>
 
-        {/* Video Overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30"></div>
+       
       </div>
 
       {/* Floating Orbs (reduced opacity for video background) */}

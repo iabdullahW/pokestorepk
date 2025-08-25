@@ -12,14 +12,14 @@ const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "700"] })
 export default function TopBar() {
   const carouselRef = useRef<HTMLDivElement>(null)
   const company_Name = [
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
-    { name: "PokemonStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
+    { name: "PokeStore" },
   ]
 
   const [isVisible, setIsVisible] = useState(true)
@@ -94,7 +94,7 @@ export default function TopBar() {
                   height={14}
                 />
                 <span>
-                  <strong className="font-bold">Pokemon</strong>
+                  <strong className="font-bold">Poke</strong>
                   <span className="font-normal ml-2">Store</span> {/* more gap */}
                 </span>
                 <Image

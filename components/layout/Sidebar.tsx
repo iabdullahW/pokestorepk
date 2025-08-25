@@ -79,7 +79,7 @@ export default function Sidebar({ isOpen, onClose, categories, user }: SidebarPr
     }
   }
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation: (path: string) => void = (path: string) => {
     if (path.startsWith("#")) {
       const element = document.querySelector(path)
       element?.scrollIntoView({ behavior: "smooth" })
@@ -168,26 +168,28 @@ export default function Sidebar({ isOpen, onClose, categories, user }: SidebarPr
                   </button>
 
                   <AnimatePresence>
-                    {isCategoriesOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden ml-6 sm:ml-8 mt-1 sm:mt-2 space-y-1"
-                      >
-                        {categories.map((category) => (
-                          <motion.button
-                            key={category.id}
-                            onClick={() => handleNavigation(`/products/${category.slug}`)}
-                            className="block w-full text-left py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg hover:bg-gray-500 transition-colors text-[#ffffff] text-xs sm:text-sm"
-                          >
-                            {category.name}
-                          </motion.button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+  {isCategoriesOpen && (
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="overflow-hidden ml-6 sm:ml-8 mt-1 sm:mt-2 space-y-1"
+    >
+      {[...categories] // copy the array to avoid mutating state
+        .sort((a, b) => a.name.localeCompare(b.name)) // ✅ alphabetical sort
+        .map((category) => (
+          <motion.button
+            key={category.id}
+            onClick={() => handleNavigation(`/products/${category.slug}`)}
+            className="block w-full text-left py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg hover:bg-gray-500 transition-colors text-[#ffffff] text-xs sm:text-sm"
+          >
+            {category.name}
+          </motion.button>
+        ))}
+    </motion.div>
+  )}
+</AnimatePresence>
                 </motion.div>
 
                 {/* Our Products */}

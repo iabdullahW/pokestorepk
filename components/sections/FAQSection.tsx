@@ -61,7 +61,7 @@ export default function FAQSection() {
   ]
 
   return (
-    <section className="bg-white" ref={sectionRef}>
+    <section id="faqs" className="bg-white" ref={sectionRef}>
       {/* Header */}
       <div className="px-6 lg:px-20 py-16">
         <motion.div

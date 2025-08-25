@@ -154,7 +154,7 @@ const Footer = () => {
         key={i}
         className="text-[19vw] leading-none marquee-item flex items-center justify-center gap-6"
       >
-        <span>POKEMON</span>
+        <span>POKE</span>
 
         <span>STORE</span>
         

@@ -7,7 +7,7 @@ export default function AboutnContact() {
 
   const about = [
     { heading: "ABOUT US" },
-    { paraone: "Welcome to Anime Craft Official" },
+    { paraone: "Welcome to Pokestorepk" },
     { paratwo: "Pakistan's go to store for Pokemon lovers" },
     { description: "From cool Cards,Stickers and exciting booster packs to trendy merch, we've got everything an otaku needs. 100% fan-approved. Delivered with love." },
   ];
@@ -24,7 +24,7 @@ export default function AboutnContact() {
   };
 
   return (
-    <section className="relative bg-[#212121] text-white py-16 px-6 overflow-hidden">
+    <section id="about" className="relative bg-[#212121] text-white py-16 px-6 overflow-hidden">
       {/* Waves at top */}
       <div className="absolute top-0 left-0 right-0">
         <div className="ocean">

@@ -7,6 +7,7 @@ import { getProductsByCategory, getCategories } from "@/lib/firestore"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import ProductCard from "@/components/products/ProductCard"
+import Image from "next/image"
 
 export default function CategorySection() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -144,19 +145,21 @@ export default function CategorySection() {
               onClick={() => handleCategoryCardClick(category.slug)}
               className="cursor-pointer rounded-[14px] border border-[#212121] bg-white text-center overflow-hidden transition-all duration-300 hover:shadow-xl"
             >
-              <div className="relative w-full pt-[100%] bg-cover bg-center">
-                <img
-                  src="/boost.webp"
-                  alt={category.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/50" />
-                {category.name === "Booster" && (
-                  <div className="absolute top-2 right-2 bg-gradient-to-t from-[#212121] to-[#444444] text-white px-2 py-1 rounded-full text-sm font-bold">
-                    Sale
-                  </div>
-                )}
-              </div>
+             <div className="relative w-full pt-[100%] bg-cover bg-center">
+  <Image
+    src="/boost.webp"
+    alt={category.name}
+    fill
+    className="absolute inset-0 object-cover"
+    priority={category.name === "Booster"} // Booster loads faster
+  />
+  <div className="absolute inset-0 bg-black/50" />
+  {category.name === "Booster" && (
+    <div className="absolute top-2 right-2 bg-gradient-to-t from-[#212121] to-[#444444] text-white px-2 py-1 rounded-full text-sm font-bold">
+      Sale
+    </div>
+  )}
+</div>
               <div className="p-6">
                 <h3 className="text-[#212121] text-3xl mb-4 font-bold">
                   {category.name}
@@ -174,51 +177,7 @@ export default function CategorySection() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Products grouped by category */}
-        {categories.map((category) => (
-          <div key={category.id} className="mb-16">
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-6 flex justify-center">
-              {category.name}
-            </h2>
-
-            {categoryProducts[category.slug]?.length ? (
-              <>
-                <motion.div
-                  key={`products-${category.slug}`}
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8"
-                >
-                  {renderProductCards(category.slug)}
-                </motion.div>
-
-                {/* View All / View Less button */}
-                <div className="flex justify-center mt-8">
-                  {shouldShowViewAll(category.slug) && (
-                    <button
-                      onClick={() => toggleCategoryExpansion(category.slug)}
-                      className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-[9px] transition-colors duration-300"
-                    >
-                      View All Products ({categoryProducts[category.slug].length})
-                    </button>
-                  )}
-                  {shouldShowViewLess(category.slug) && (
-                    <button
-                      onClick={() => toggleCategoryExpansion(category.slug)}
-                      className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-[9px] transition-colors duration-300"
-                    >
-                      View Less
-                    </button>
-                  )}
-                </div>
-              </>
-            ) : (
-              <p className="text-gray-400 flex justify-center">No products found.</p>
-            )}
-          </div>
-        ))}
+{/*        {/* Product cards */}
       </div>
     </section>
   )

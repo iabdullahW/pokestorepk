@@ -127,7 +127,7 @@ export default function CustomerAuth({ isOpen, onClose, onSuccess }: CustomerAut
                   value={formData.name}
                   onChange={handleInputChange}
                   required={!isLogin}
-                  className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base"
+                  className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base text-black"
                   placeholder="Enter your full name"
                 />
               </div>
