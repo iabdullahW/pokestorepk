@@ -12,7 +12,7 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat
 const metaTags = getMetaTags();
 
 export const metadata = {
-    metadataBase: new URL("https://pokemonstorepk.vercel.app"),
+    metadataBase: new URL("https://pokemonstorepk.com/"),
   title: "PokeStore - Your Ultimate Destination for Pokémon Cards",
   description:
     "Discover the best Pokémon cards, collectibles, and accessories at PokemonStore. Shop now for exclusive deals and rare finds!",
@@ -24,7 +24,7 @@ export const metadata = {
   openGraph: {
     title: "PokeStore - Your Ultimate Destination for Pokémon Cards",
     description: "Discover the best Pokémon cards, collectibles, and accessories at PokemonStore. Shop now for exclusive deals and rare finds!",
-    url: "https://pokemonstorepk.vercel.app/",
+    url: "https://pokemonstorepk.com/",
     images: [{ url: "/aboutus.jpg" }],
     siteName: "PokemonStore",
   },
