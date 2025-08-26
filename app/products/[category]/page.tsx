@@ -13,6 +13,7 @@ import type { Product, Category } from "@/types"
 import { getProductsByCategory, getCategories } from "@/lib/firestore"
 import { useToast } from "@/hooks/use-toast"
 import Sidebar from "@/components/layout/Sidebar"
+import MidBar from "@/components/layout/MidBar"
 
 export default function CategoryPage() {
   const params = useParams()
@@ -39,7 +40,7 @@ export default function CategoryPage() {
 
       // Find the category by slug
       const foundCategory = fetchedCategories.find(cat => cat.slug === categorySlug)
-      
+
       if (!foundCategory) {
         toast({
           title: "Category Not Found",
@@ -94,9 +95,11 @@ export default function CategoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
+      <div className="min-h-screen bg-[#212121]">
         <TopBar />
+        <MidBar />
+        <Navbar />
+
         <div className="pt-20">
           <div className="flex items-center justify-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-500"></div>
@@ -109,9 +112,10 @@ export default function CategoryPage() {
 
   if (!category) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
+      <div className="min-h-screen bg-[#212121]">
         <TopBar />
+        <MidBar />
+        <Navbar />
         <div className="pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="text-center">
@@ -132,37 +136,42 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div className="min-h-screen bg-[#212121] ">
       <TopBar />
+      <MidBar />
+      <Navbar />
       <div className="">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-          {/* Back Button */}
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-[#B56F76] hover:text-rose-600 transition-colors mb-8"
-          >
-            <FiArrowLeft className="w-4 h-4" />
-            Back
-          </motion.button>
-
           {/* Category Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="mt-24"
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-400 rounded-full flex items-center justify-center text-white">
-                <FiPackage className="w-6 h-6" />
+            <div className="relative flex items-center">
+              {/* Back Button - Left */}
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                onClick={() => router.back()}
+                className="flex items-center gap-2 text-[#B56F76] hover:text-rose-600 transition-colors"
+              >
+                <FiArrowLeft className="w-4 h-4" />
+                Back
+              </motion.button>
+              
+              {/* Category Icon and Name - Center */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-400 rounded-full flex items-center justify-center text-white">
+                  <FiPackage className="w-6 h-6" />
+                </div>
+                <h1 className="text-4xl font-bold text-white">{category.name}</h1>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900">{category.name}</h1>
             </div>
+            
             {category.description && (
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center">
                 {category.description}
               </p>
             )}
@@ -179,9 +188,9 @@ export default function CategoryPage() {
               <div className="w-24 h-24 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <FiPackage className="w-12 h-12 text-rose-500" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
-              <p className="text-lg text-gray-600 mb-8">
-                We're working hard to bring you amazing {category.name.toLowerCase()} products. 
+              <h2 className="text-2xl font-bold text-white mb-4">Coming Soon!</h2>
+              <p className="text-lg text-gray-200 mb-8">
+                We're working hard to bring you amazing {category.name.toLowerCase()} products.
                 Check back soon for new arrivals!
               </p>
               <button

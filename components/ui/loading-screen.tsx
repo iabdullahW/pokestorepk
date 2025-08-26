@@ -17,7 +17,7 @@ export default function LoadingScreen({ setComplete }: LoadingScreenProps) {
   const overlay2Ref = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
 
-  const word = ['P', 'O', 'K', 'E', 'M', 'O', 'N'];
+  const word = ['P', 'O', 'K', 'E',];
 
   useEffect(() => {
     let isMounted = true;
@@ -332,7 +332,7 @@ export default function LoadingScreen({ setComplete }: LoadingScreenProps) {
             className="mt-16"
           >
             <p className="text-white/30 text-xs font-light tracking-widest">
-              POKEMON STORE PK
+              POKE STORE PK
             </p>
           </motion.div>
         </div>
