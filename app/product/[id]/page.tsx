@@ -622,7 +622,7 @@ export default function ProductPage() {
 
                 <div>
                   <h3 className="font-semibold text-[#ffffff] mb-2 sm:mb-3 text-base sm:text-lg">Description</h3>
-                  <p className="text-white leading-relaxed text-sm sm:text-base">{product.description}</p>
+                  <p className="text-white leading-relaxed text-sm sm:text-base whitespace-pre-line">{product.description}</p>
                 </div>
               </motion.div>
             </div>
