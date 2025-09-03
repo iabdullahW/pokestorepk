@@ -15,39 +15,63 @@ export default function ReviewsSection() {
   const reviews = [
   {
     "id": 1,
-    "name": "-Sherry.",
+    "name": "-Zaid Azhar",
     "rating": 5,
-    "comment": "Amazing quality! My son loved the Pokémon booster. Will buy again!"
+    "comment": "Received the cards! Thanks for the gift!"
   },
   {
     "id": 2,
-    "name": "-Sara A.",
+    "name": "-Usma",
     "rating": 5,
-    "comment": "Exceeded my expectations. highly recommended"
+    "comment": "Assalamu alaikum, parcel received alhamdulillah. All things in 10/10 condition"
   },
   {
     "id": 3,
-    "name": "-Ashna Mirza.",
-    "rating": 4,
-    "comment": "Perfect for my collection! I'm a big anime fan and this action figure fits right in with my Dragon Ball and Naruto collections."
+    "name": "-Shayan",
+    "rating": 5,
+    "comment": "Received the parcel. Love these, will open and share the hits, thank you Pokemon Store Pakistan you rock"
   },
   {
     "id": 4,
-    "name": "Hira Baloch",
+    "name": "-Khalid",
     "rating": 5,
-    "comment": "Perfect colors and design. My kids are thrilled with their new Pokémon cards!"
+    "comment": "Second purchase from you absolutely love the condition of the card 10/10. One of the cards I wanted to add to my collection and I'm glad you had it, will get the other dream cards from you as well"
   },
   {
     "id": 5,
-    "name": "-Hassan R.",
+    "name": "-Talal",
     "rating": 5,
-    "comment": "Gem Packs were packed nicely and had rare cards inside. Totally worth it!!"
+    "comment": "It was received on time great service and the price was reasonable. Guys please support him and help him grow and let's build this community"
   },
   {
     "id": 6,
-    "name": "-Nafay.",
+    "name": "-Ozair",
     "rating": 5,
-    "comment": "Quality of cards and delivery was on point."
+    "comment": "Bought 151 booster bundle. Smooth experience as ever. This time I paid before and he used a local courier to deliver. Box arrived without any damage."
+  },
+  {
+    "id": 7,
+    "name": "-Abdul Moiz",
+    "rating": 5,
+    "comment": "Received <3 best service and best rates"
+  },
+  {
+    "id": 8,
+    "name": "-Hassan",
+    "rating": 5,
+    "comment": "Great seller! Cards arrived on time, in perfect condition, and exactly as described. Fair price and smooth communication. Highly recommended!"
+  },
+  {
+    "id": 9,
+    "name": "-Hasan",
+    "rating": 5,
+    "comment": "Legit stuff. Good service and great vendor for other items"
+  },
+  {
+    "id": 10,
+    "name": "-Shayan",
+    "rating": 5,
+    "comment": "Overall experience is good and 💯 recommend. I ordered second time and it's condition is good and sealed"
   }
 ];
 const whitereviewGrid = [
