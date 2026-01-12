@@ -6,14 +6,10 @@ import type { Product, Category } from "@/types"
 import { getProductsByCategory, getCategories } from "@/lib/firestore"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
-import ProductCard from "@/components/products/ProductCard"
 import Image from "next/image"
 
 export default function CategorySection() {
   const [categories, setCategories] = useState<Category[]>([])
-  const [categoryProducts, setCategoryProducts] = useState<Record<string, Product[]>>({})
-  // Use a simple object for expanded state instead of Set for better React state updates
-  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({})
   const [isMounted, setIsMounted] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
@@ -22,163 +18,78 @@ export default function CategorySection() {
     const fetchData = async () => {
       try {
         const all = await getCategories()
-        const allowed = ["Booster", "Blister", "PSA", "RAW Cards"]
-        const filtered = all.filter((c) => allowed.includes(c.name))
-        setCategories(filtered)
 
-        // fetch products for each category
-        const productsByCategory: Record<string, Product[]> = {}
-        for (const cat of filtered) {
-          const prods = await getProductsByCategory(cat.slug)
-          productsByCategory[cat.slug] = prods
-        }
-        setCategoryProducts(productsByCategory)
+        // 1. EXACT NAMES JO AAPNE CONSOLE MEIN DEKHE
+        const allowed = ["Booster Box", "Blister", "Psa", "Raw Card"]
+
+        const filtered = all.filter((c) => 
+          allowed.includes(c.name.trim())
+        )
+
+        // Debugging ke liye (iske niche 4 naam aane chahiye)
+        console.log("Ab sirf ye 4 cards hain:", filtered.map(cat => cat.name))
+
+        setCategories(filtered)
       } catch (error) {
-        console.error('Error fetching categories:', error)
-        toast({
-          title: "Error",
-          description: "Could not load categories/products",
-          variant: "destructive",
-        })
+        console.error(error)
       } finally {
         setIsMounted(true)
       }
     }
-    
-    // Only run on client side
-    if (typeof window !== 'undefined') {
-      fetchData()
-    } else {
-      // On server side, set isMounted to true to avoid hydration mismatch
-      setIsMounted(true)
-    }
-  }, [toast])
+    fetchData()
+  }, [])
 
-  const toggleCategoryExpansion = (categorySlug: string) => {
-    setExpandedCategories(prev => ({
-      ...prev,
-      [categorySlug]: !prev[categorySlug]
-    }));
+  const handleCategoryCardClick = (slug: string) => {
+    router.push(`/products?category=${slug}`)
   }
 
-  // NEW: Handle category card click to navigate to products page with category filter
-  const handleCategoryCardClick = (categorySlug: string) => {
-    router.push(`/products?category=${categorySlug}`)
-  }
-
-  const getDisplayedProducts = (categorySlug: string) => {
-    const products = categoryProducts[categorySlug] || [];
-    const isExpanded = !!expandedCategories[categorySlug];
-    return isExpanded ? products : products.slice(0, 4);
-  }
-
-  const shouldShowViewAll = (categorySlug: string) => {
-    const products = categoryProducts[categorySlug] || [];
-    return products.length > 4 && !expandedCategories[categorySlug];
-  }
-
-  const shouldShowViewLess = (categorySlug: string) => {
-    const products = categoryProducts[categorySlug] || [];
-    return products.length > 4 && !!expandedCategories[categorySlug];
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-  }
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
-  // Memoize the product cards to prevent unnecessary re-renders
-  const renderProductCards = (categorySlug: string) => {
-    const products = getDisplayedProducts(categorySlug);
-    return products.map((product) => (
-      <motion.div key={product.id} variants={itemVariants}>
-        <ProductCard
-          product={product}
-          className="w-full"
-          onAddToCart={() => {}}
-        />
-      </motion.div>
-    ));
-  };
-
-  // Show loading state during initial render
-  if (!isMounted || !categories.length) {
-    return (
-      <div className="flex items-center justify-center py-24">
-        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-rose-600" />
-      </div>
-    )
-  }
+  if (!isMounted) return <div className="h-24" />
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1f1f1f] to-[#121212]">
+    <section className="py-12 px-4 bg-gradient-to-b from-[#1f1f1f] to-[#121212]">
       <div className="max-w-7xl mx-auto">
-        {/* All products button */}
-        <div className="flex justify-center mb-8">
-          <button
-            onClick={() => router.push("/products")}
-            className=" bg-gray-600 text-white px-4 py-2 rounded-[9px]"
-          >
-            All products
+        <div className="flex justify-center mb-10">
+          <button onClick={() => router.push("/products")} className="bg-gray-600 text-white px-5 py-2 rounded-lg">
+            All Products
           </button>
         </div>
-      </div>
 
-      <div className="w-full px-4 max-w-7xl mx-auto">
-        {/* Category cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 gap-y-3 mb-12"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
-            <motion.div
-              key={category.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
+            <div 
+              key={category.id} 
               onClick={() => handleCategoryCardClick(category.slug)}
-              className="cursor-pointer rounded-[14px] border border-[#212121] bg-white text-center overflow-hidden transition-all duration-300 hover:shadow-xl"
+              className="cursor-pointer rounded-[14px] border border-[#212121] bg-white overflow-hidden text-center shadow-lg"
             >
-             <div className="relative w-full pt-[100%] bg-cover bg-center">
+             <div className="relative w-full pt-[100%]">
   <Image
-    src="/boost.webp"
+    src={
+      category.name === "Booster Box" ? "/booster.webp" : 
+      category.name === "Raw Card" ? "/Raw-cards.webp" : 
+      `/${category.slug}.webp`
+    }
     alt={category.name}
     fill
-    className="absolute inset-0 object-cover"
-    priority={category.name === "Booster"} // Booster loads faster
+    className="object-cover"
+    unoptimized
   />
-  <div className="absolute inset-0 bg-black/50" />
-  {category.name === "Booster" && (
-    <div className="absolute top-2 right-2 bg-gradient-to-t from-[#212121] to-[#444444] text-white px-2 py-1 rounded-full text-sm font-bold">
-      Sale
-    </div>
-  )}
+  <div className="absolute inset-0 bg-black/10" />
 </div>
+
+
               <div className="p-6">
-                <h3 className="text-[#212121] text-3xl mb-4 font-bold">
-                  {category.name}
+                <h3 className="text-2xl font-bold text-[#212121] mb-4 uppercase">
+                  {category.name === "Blister" ? "Bundles" : category.name}
                 </h3>
-                <button 
-                  className="py-2 px-3 bg-[#212121] hover:bg-[#444444] font-bold text-white rounded-[10px]"
-                  onClick={(e) => {
-                    e.stopPropagation() // Prevent double navigation
-                    handleCategoryCardClick(category.slug)
-                  }}
-                >
+                <button className="bg-[#212121] text-white font-bold px-6 py-2 rounded-lg w-full">
                   Shop Now
                 </button>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-{/*        {/* Product cards */}
+        </div>
       </div>
     </section>
   )
 }
+
