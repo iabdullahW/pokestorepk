@@ -1,45 +1,46 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint block removed (Next.js 16 handles this via CLI)
+  
   typescript: {
     ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,
-    domains: [
-      'placeholder.svg',
-      'firebasestorage.googleapis.com',
-      'lh3.googleusercontent.com',
-      'images.unsplash.com',
-      'via.placeholder.com',
-      'picsum.photos',
-      'res.cloudinary.com'
-    ],
+    // domains removed (deprecated in favor of remotePatterns)
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'firebasestorage.googleapis.com',
-        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
-        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      }
     ],
   },
-  // Remove output: 'export' for Vercel deployment
-  // output: 'export',
 }
 
 export default nextConfig

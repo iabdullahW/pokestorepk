@@ -22,7 +22,7 @@ export default function CategorySection() {
         // 1. EXACT NAMES JO AAPNE CONSOLE MEIN DEKHE
         const allowed = ["Booster Box", "Blister", "Psa", "Raw Card"]
 
-        const filtered = all.filter((c) => 
+        const filtered = all.filter((c) =>
           allowed.includes(c.name.trim())
         )
 
@@ -56,25 +56,25 @@ export default function CategorySection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
-            <div 
-              key={category.id} 
+            <div
+              key={category.id}
               onClick={() => handleCategoryCardClick(category.slug)}
               className="cursor-pointer rounded-[14px] border border-[#212121] bg-white overflow-hidden text-center shadow-lg"
             >
-             <div className="relative w-full pt-[100%]">
-  <Image
-    src={
-      category.name === "Booster Box" ? "/booster.webp" : 
-      category.name === "Raw Card" ? "/Raw-cards.webp" : 
-      `/${category.slug}.webp`
-    }
-    alt={category.name}
-    fill
-    className="object-cover"
-    unoptimized
-  />
-  <div className="absolute inset-0 bg-black/10" />
-</div>
+              <div className="relative w-full pt-[100%]">
+                <Image
+                  src={
+                    category.name === "Booster Box" ? "/booster.webp" :
+                      category.name === "Raw Card" ? "/Raw-cards.webp" :
+                        `/${category.slug}.webp`
+                  }
+                  alt={category.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-black/10" />
+              </div>
 
 
               <div className="p-6">
