@@ -4,9 +4,9 @@ import React from "react";
 
 export default function WhiteReview() {
   const videoGrid = [
-    { id: 1, video: "/videos/1.mp4" },
-    { id: 2, video: "/videos/2.mp4" },
-    { id: 3, video: "/videos/3.mp4" },
+    { id: 1, video: "pokestorevidone.mp4" },
+    { id: 2, video: "pokestorevidtwo.mp4" },
+    { id: 3, video: "pokestorevidthree.mp4" },
   ];
 
   return (

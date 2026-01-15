@@ -76,7 +76,6 @@ export default function CategorySection() {
                 <div className="absolute inset-0 bg-black/10" />
               </div>
 
-
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-[#212121] mb-4 uppercase">
                   {category.name === "Blister" ? "Bundles" : category.name}
