@@ -64,15 +64,20 @@ export default function CategorySection() {
               <div className="relative w-full pt-[100%]">
                 <Image
                   src={
-                    category.name === "Booster Box" ? "/booster.webp" :
-                      category.name === "Raw Card" ? "/Raw-cards.webp" :
-                        `/${category.slug}.webp`
+                    category.name === "Booster Box"
+                      ? "/booster.webp"
+                      : category.name === "Raw Card"
+                        ? "/raw-card.webp"
+                        : category.name === "Psa"
+                          ? "/psa.webp"
+                          : "/blister.webp"
                   }
                   alt={category.name}
                   fill
                   className="object-cover"
                   unoptimized
                 />
+
                 <div className="absolute inset-0 bg-black/10" />
               </div>
 
