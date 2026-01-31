@@ -83,8 +83,12 @@ export default function CategorySection() {
 
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-[#212121] mb-4 uppercase">
-                  {category.name === "Blister" ? "Bundles" : category.name}
+                  {{
+                    "Booster Box": "Booster Pack",
+                    "Blister": "Booster Bundle"
+                  }[category.name] || category.name}
                 </h3>
+
                 <button className="bg-[#212121] text-white font-bold px-6 py-2 rounded-lg w-full">
                   Shop Now
                 </button>
